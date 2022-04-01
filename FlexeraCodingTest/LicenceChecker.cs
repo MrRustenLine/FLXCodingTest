@@ -24,17 +24,21 @@ namespace FlexeraCodingTest
                     string ds = sr.ReadToEnd();
                     string[] table = ds.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
                     List<Computer> computers = new List<Computer>();
-                    for (int rowCount = 0; rowCount < table.Length; rowCount++)
+                    for (int rowCount = 1; rowCount < table.Length; rowCount++)
                     {
                         string[] row = SmartSplit(table[rowCount]);
-                        Computer computer = new Computer(int.Parse(row[0]), int.Parse(row[1]), int.Parse(row[2]), row[3].ToLower(), row[4].ToLower());
-                        computers.Add(computer);
+                        int appID = int.Parse(row[2]);
+                        if (appID == 374)
+                        {
+                            Computer computer = new Computer(int.Parse(row[0]), int.Parse(row[1]), int.Parse(row[2]), row[3].ToLower());
+                            computers.Add(computer);
+                        }
                     }
                     return computers;
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Failed to process the data file in GetComputers(). " + Environment.NewLine);
+                    Console.WriteLine("Failed to process the data file in GetComputers() " + Environment.NewLine + ex.Message);
                     throw;
                 }
             }
@@ -44,45 +48,52 @@ namespace FlexeraCodingTest
             Console.WriteLine("Commencing to check licences. Please wait..." + Environment.NewLine);
             try
             {        
-                int licenceNo = 0;
-                List<Computer> computers = GetComputers(dataFile);
-                List<Computer> checkedComputers = new List<Computer>();
-                foreach(Computer computer in computers)
+                List<Computer> pCs = GetComputers(dataFile);             
+                List<Computer> checkedPCs = new List<Computer>();
+                List<Computer> licensedPCs = new List<Computer>();
+                List<Computer> licensedPCsBelongingToUser = new List<Computer>();
+                int licences = 0;
+                int noOfLicensedPCsBelongingToUser =0;
+                foreach (Computer pC in pCs)
                 {
-                    if (computer.ApplicationID == 374)
+                    licences++;
+                    if (checkedPCs.Contains(pC))
                     {
                         // We checked this computer before.
-                        if (checkedComputers.Contains(computer))
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            //Did this userID install it on 2 machines already?
-                            if (checkedComputers.Where(checkedComputer => checkedComputer.UserID == computer.UserID).Any())
-                            {
-                                continue;
-                            }
-                            else
-                            {
-                                checkedComputers.Add(computer);
-                                //Is one of the machines in the checkedComputers a laptop?
-                                // continue
-                                // else
-                                // 
-                                //licenceNo++;
-                            }
-
-                        }
+                        licences--;
+                        continue;
                     }
                     else
                     {
-                        continue;
+                        checkedPCs.Add(pC);
+                        licensedPCsBelongingToUser = licensedPCs.Where(licensedPC => licensedPC.UserID == pC.UserID).ToList();
+                        noOfLicensedPCsBelongingToUser = licensedPCsBelongingToUser.Count;
+                        switch (noOfLicensedPCsBelongingToUser)
+                        {
+                            case 0:
+                                licensedPCs.Add(pC);
+                                continue;
+                            case 1:
+                                if ((pC.ComputerType == "desktop") & (licensedPCsBelongingToUser[0].ComputerType == "desktop"))
+                                {
+                                    licensedPCs.Add(pC);
+                                    continue;
+                                }
+                                else
+                                {
+                                    licences--;
+                                    continue;
+                                }
+                            case 2:
+                                // UserUD reached the maximum number of licences
+                                licences--;
+                                continue;
+                        }
                     }
                 }
                     
                 Console.WriteLine("Finished checking licences successfully. " + Environment.NewLine);
-                return licenceNo;
+                return licences;
             }
             catch (Exception ex)
             {

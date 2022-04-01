@@ -9,13 +9,12 @@ namespace FlexeraCodingTest
     internal struct Computer
     {
         internal int ComputerID { get; set; }
-        internal Computer(int computerID, int userID, int applicationID, string computerType, string comment )
+        internal Computer(int computerID, int userID, int applicationID, string computerType )
         {
             ComputerID = computerID;
             UserID = userID;
             ApplicationID = applicationID;
-            ComputerType = computerType;
-            Comment = comment;
+            ComputerType = computerType.ToLower();
 
         }
         internal int UserID { get; set; }
@@ -23,6 +22,5 @@ namespace FlexeraCodingTest
 
         internal string ComputerType { get; set; }
 
-        internal string Comment { get; set; }
     }
 }
