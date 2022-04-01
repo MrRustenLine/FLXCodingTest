@@ -1,3 +1,0 @@
-C:\Users\Rusten\source\repos\FlexeraCodingTest\FlexeraCodingTest\sample-small.csv
-
-C:\Users\Rusten\source\repos\FlexeraCodingTest\FlexeraCodingTest\UnitTest1DataFile.csv

@@ -17,13 +17,13 @@ namespace FlexeraCodingTest
     {
         private static List<Computer> GetComputers(string dataFile)
         {
+            List<Computer> computers = new List<Computer>();
             using (StreamReader sr = new StreamReader(dataFile))
             {
                 try
                 {
                     string ds = sr.ReadToEnd();
                     string[] table = ds.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-                    List<Computer> computers = new List<Computer>();
                     for (int rowCount = 1; rowCount < table.Length; rowCount++)
                     {
                         string[] row = SmartSplit(table[rowCount]);
@@ -34,13 +34,17 @@ namespace FlexeraCodingTest
                             computers.Add(computer);
                         }
                     }
-                    return computers;
+                }
+                catch (IndexOutOfRangeException iorEx)
+                {
+
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine("Failed to process the data file in GetComputers() " + Environment.NewLine + ex.Message);
                     throw;
                 }
+                return computers;
             }
         }
         public static int CheckNoOfLicences(string dataFile)
