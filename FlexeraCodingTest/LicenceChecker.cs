@@ -7,57 +7,27 @@ using System.Data;
 
 /* Author: Rusten Line
  * Date: 27.3.22
- * Desc: The licence checker class is tasked with evaluating the number of lincences.
- * It is based on Singleton design pattern.
+ * Desc: The licence checker class is tasked with evaluating the number of licences for ApplicationID 374 allocated to each user. In reality, 
+ * the ApplicationID and maximum No of licences per user should be configurable.
  */
 namespace FlexeraCodingTest
 {
     
-     public static class LicenceChecker
+     public class LicenceChecker: ILicenceChecker
     {
-        private static List<Computer> GetComputers(string dataFile)
-        {
-            List<Computer> computers = new List<Computer>();
-            using (StreamReader sr = new StreamReader(dataFile))
-            {
-                try
-                {
-                    string ds = sr.ReadToEnd();
-                    string[] table = ds.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-                    for (int rowCount = 1; rowCount < table.Length; rowCount++)
-                    {
-                        string[] row = SmartSplit(table[rowCount]);
-                        int appID = int.Parse(row[2]);
-                        if (appID == 374)
-                        {
-                            Computer computer = new Computer(int.Parse(row[0]), int.Parse(row[1]), int.Parse(row[2]), row[3].ToLower());
-                            computers.Add(computer);
-                        }
-                    }
-                }
-                catch (IndexOutOfRangeException iorEx)
-                {
+        #region "Public"
 
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Failed to process the data file in GetComputers() " + Environment.NewLine + ex.Message);
-                    throw;
-                }
-                return computers;
-            }
-        }
-        public static int CheckNoOfLicences(string dataFile)
+        public int CheckNoOfLicences (string dataFile)
         {
             Console.WriteLine("Commencing to check licences. Please wait..." + Environment.NewLine);
             try
-            {        
-                List<Computer> pCs = GetComputers(dataFile);             
+            {
+                List<Computer>? pCs = GetComputers(dataFile);
                 List<Computer> checkedPCs = new List<Computer>();
                 List<Computer> licensedPCs = new List<Computer>();
                 List<Computer> licensedPCsBelongingToUser = new List<Computer>();
                 int licences = 0;
-                int noOfLicensedPCsBelongingToUser =0;
+                int noOfLicensedPCsBelongingToUser = 0;
                 foreach (Computer pC in pCs)
                 {
                     licences++;
@@ -84,7 +54,7 @@ namespace FlexeraCodingTest
                                     continue;
                                 }
                                 else
-                                {
+                                {   // one of the PCs is a laptop
                                     licences--;
                                     continue;
                                 }
@@ -95,7 +65,7 @@ namespace FlexeraCodingTest
                         }
                     }
                 }
-                    
+
                 Console.WriteLine("Finished checking licences successfully. " + Environment.NewLine);
                 return licences;
             }
@@ -104,6 +74,48 @@ namespace FlexeraCodingTest
                 Console.WriteLine("Finished checking licences failed. " + Environment.NewLine);
                 throw;
             }
+        }
+
+        #endregion
+
+        #region "Private"
+
+        private List<Computer>? GetComputers(string dataFile)
+        {
+            List<Computer> computers = new List<Computer>();
+            try
+            {
+                using (StreamReader sr = new StreamReader(dataFile))
+                {
+
+                    string ds = sr.ReadToEnd();
+                    string[] table = ds.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+                    for (int rowCount = 1; rowCount < table.Length; rowCount++)
+                    {
+                        string[] row = SmartSplit(table[rowCount]);
+                        int appID = int.Parse(row[2]);
+                        if (appID == 374)
+                        {
+                            // We are not interested in Comment field.
+                            Computer computer = new Computer(int.Parse(row[0]), int.Parse(row[1]), int.Parse(row[2]), row[3].ToLower());
+                            computers.Add(computer);
+                        }
+                    }
+                    return computers;
+                }
+            }
+            //If data files contain some unexpected formating.
+            catch (IndexOutOfRangeException iorEx)
+            {
+
+                Console.WriteLine("IndexOutOfRangeException - Check characters at the end of the file! " + Environment.NewLine);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Failed to process the data file in GetComputers(). " + Environment.NewLine + ex.Message);
+                throw;
+            }
+            return null;
         }
 
         private static string[] SmartSplit(string line, char separator = ',')
@@ -141,6 +153,8 @@ namespace FlexeraCodingTest
             lines.Add(token);
             return lines.ToArray();
         }
+
+        #endregion
 
     }
 
