@@ -49,9 +49,10 @@ Please provide a solution that calculates the minimum of copies of the applicati
 You will not have to consider unexpected situations such as empty values, computers with multiple users or computers that are both desktops and laptops.
 
 Rusten Line's comments:
-- I used Visual Studio 2022 (free version).
+- I used Visual Studio 2022 (free version). I recommend you use it as well.
 - ApplicationID and "only two copies of the application are required" per user are hard coded. Obviously, they should be configurable in reality.
-- 3 Unit tests are included in the Development version (change Solution Configuration to Debug in Visual Studio) and another test covering sample-small.csv.
+- 3 Unit tests are included in the Development version (change Solution Configuration to Debug in Visual Studio) and another test covering sample-small.csv as well.
 - The app does not check all the possible situations that may go wrong.
-- To test the production version, change the Solution Configuration to Release.
+- To test the production version, change the Solution Configuration to Release. I test it quickly without having to deploy it by going to \FlexeraCodingTest\FlexeraCodingTest\bin\Release\net6.0
+folder and launching FlexeraCodingTest.exe. To have a proper test, one should build an installation package and test on a clean PC.
 - Deployment instructions are out of scope but could be provided upon request.
