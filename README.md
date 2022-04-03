@@ -48,7 +48,7 @@ Please provide a solution that calculates the minimum of copies of the applicati
 ### Safe assumptions to make
 You will not have to consider unexpected situations such as empty values, computers with multiple users or computers that are both desktops and laptops.
 
-Rusten Line's comments:
+**Rusten Line's comments:**
 - I used Visual Studio 2022 (free version). I recommend you use it as well.
 - ApplicationID and "only two copies of the application are required" per user are hard coded. Obviously, they should be configurable in reality.
 - 3 Unit tests are included in the Development version (change Solution Configuration to Debug in Visual Studio) and another test covering sample-small.csv as well.
