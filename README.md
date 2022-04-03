@@ -56,3 +56,4 @@ You will not have to consider unexpected situations such as empty values, comput
 - To test the production version, change the Solution Configuration to Release. I test it quickly without having to deploy it by going to \FlexeraCodingTest\FlexeraCodingTest\bin\Release\net6.0
 folder and launching FlexeraCodingTest.exe. To have a proper test, one should build an installation package and test on a clean PC.
 - Deployment instructions are out of scope but could be provided upon request.
+- I would not call it a production quality yet but perhaps ready for testing.
