@@ -1,5 +1,5 @@
 # Flexera coding test
-This test is to assess your ability to write world class production code that would be included in our Flexera products 
+This test is to assess one's ability to write world class production code that would be included in our Flexera products 
 
 ## Problem
 
@@ -51,3 +51,9 @@ You will not have to consider unexpected situations such as empty values, comput
 ### Sample test inputs
 - A sample CSV with small amount of data inputs can be found under directory \test
 - A sample CSV with huge volume of data inputs can be downloaded following the instructions in \test\readme.md
+
+Rusten Line's comments:
+- ApplicationID and "only two copies of the application are required" per user are hard coded. Obviously, they should be configurable in reality.
+- 3 Unit tests are included in the Development version (change Solution Configuration to Debug) and another test covering sample-small.csv.
+- To test the production version, change the Solution Configuration to Release.
+- Deployment instructions are out of scope.
