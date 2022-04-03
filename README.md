@@ -48,12 +48,10 @@ Please provide a solution that calculates the minimum of copies of the applicati
 ### Safe assumptions to make
 You will not have to consider unexpected situations such as empty values, computers with multiple users or computers that are both desktops and laptops.
 
-### Sample test inputs
-- A sample CSV with small amount of data inputs can be found under directory \test
-- A sample CSV with huge volume of data inputs can be downloaded following the instructions in \test\readme.md
-
 Rusten Line's comments:
+- I used Visual Studio 2022 (free version).
 - ApplicationID and "only two copies of the application are required" per user are hard coded. Obviously, they should be configurable in reality.
-- 3 Unit tests are included in the Development version (change Solution Configuration to Debug) and another test covering sample-small.csv.
+- 3 Unit tests are included in the Development version (change Solution Configuration to Debug in Visual Studio) and another test covering sample-small.csv.
+- The app does not check all the possible situations that may go wrong.
 - To test the production version, change the Solution Configuration to Release.
-- Deployment instructions are out of scope.
+- Deployment instructions are out of scope but could be provided upon request.
