@@ -49,8 +49,14 @@ The customer also indicated the following requirements:
 ### Safe assumptions to make
 You will not have to consider unexpected situations such as empty values, computers with multiple users or computers that are both desktops and laptops.
 
-**My comments:**
-- I used Visual Studio 2022 Community Edition, .NET Framework 6.0. 
-- 3 NUnit tests are included. 
-- The app does not check all the possible situations that may go wrong.
-- Deployment instructions are out of scope but could be provided upon request.
+# My comments:**
+
+I used Visual Studio 2022 Community Edition, .NET Framework 6.0. 
+
+3 NUnit tests are included. 
+
+The app does not check all the possible situations that may go wrong. 
+
+Deployment instructions are out of scope but could be provided upon request.
+
+Finally, did I get the job? I accepted a job offer from another vendor while this company was mulling over my code sample.
