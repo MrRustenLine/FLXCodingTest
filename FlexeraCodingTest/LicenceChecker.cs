@@ -1,28 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data;
+﻿global using global::System;
+global using global::System.Collections.Generic;
+global using global::System.IO;
+global using global::System.Linq;
+global using global::System.Net.Http;
+global using global::System.Threading;
+global using global::System.Threading.Tasks;
+global using global::System.Configuration;
 
 /* Author: Rusten Line
  * Date: 27.3.22
- * Desc: The licence checker class is tasked with evaluating the number of licences for ApplicationID 374 allocated to each user. In reality, 
- * the ApplicationID and maximum No of licences per user should be configurable.
+ * Desc: The licence checker class is tasked with evaluating the required number of per device licences.
  */
 namespace FlexeraCodingTest
 {
-    
-     public class LicenceChecker: ILicenceChecker
+
+    public class LicenceChecker: ILicenceChecker
     {
         #region "Public"
 
-        public int CheckNoOfLicences (string dataFile)
+        public int CheckNoOfLicences (string dataFile, string appID)
         {
             Console.WriteLine("Commencing to check licences. Please wait..." + Environment.NewLine);
             try
             {
-                List<Computer>? pCs = GetComputers(dataFile);
+                List<Computer>? pCs = GetComputers(dataFile, appID);
                 List<Computer> checkedPCs = new List<Computer>();
                 List<Computer> licensedPCs = new List<Computer>();
                 List<Computer> licensedPCsBelongingToUser = new List<Computer>();
@@ -80,24 +81,22 @@ namespace FlexeraCodingTest
 
         #region "Private"
 
-        private List<Computer>? GetComputers(string dataFile)
+        private List<Computer>? GetComputers(string dataFile, string appID)
         {
             List<Computer> computers = new List<Computer>();
             try
             {
-                using (StreamReader sr = new StreamReader(dataFile))
+                using (StreamReader reader = new StreamReader(dataFile))
                 {
-
-                    string ds = sr.ReadToEnd();
-                    string[] table = ds.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-                    for (int rowCount = 1; rowCount < table.Length; rowCount++)
+                    // split line by line otherwise it could be too memory intensive.
+                    while (!reader.EndOfStream)
                     {
-                        string[] row = SmartSplit(table[rowCount]);
-                        int appID = int.Parse(row[2]);
-                        if (appID == 374)
+                        var line = reader.ReadLine();
+                        var values = line.Split(',');
+                        if (values[2] == appID)
                         {
                             // We are not interested in Comment field.
-                            Computer computer = new Computer(int.Parse(row[0]), int.Parse(row[1]), int.Parse(row[2]), row[3].ToLower());
+                            Computer computer = new Computer(int.Parse(values[0]), int.Parse(values[1]), int.Parse(values[2]), values[3].ToLower());
                             computers.Add(computer);
                         }
                     }
@@ -117,46 +116,8 @@ namespace FlexeraCodingTest
             }
             return null;
         }
-
-        private static string[] SmartSplit(string line, char separator = ',')
-        {
-            var inQuotes = false;
-            var token = "";
-            var lines = new List<string>();
-            for (var i = 0; i < line.Length; i++)
-            {
-                var ch = line[i];
-                if (inQuotes) // process string in quotes, 
-                {
-                    if (ch == '"')
-                    {
-                        if (i < line.Length - 1 && line[i + 1] == '"')
-                        {
-                            i++;
-                            token += '"';
-                        }
-                        else inQuotes = false;
-                    }
-                    else token += ch;
-                }
-                else
-                {
-                    if (ch == '"') inQuotes = true;
-                    else if (ch == separator)
-                    {
-                        lines.Add(token);
-                        token = "";
-                    }
-                    else token += ch;
-                }
-            }
-            lines.Add(token);
-            return lines.ToArray();
-        }
-
         #endregion
 
     }
-
     
 }
