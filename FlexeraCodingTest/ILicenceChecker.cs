@@ -8,6 +8,6 @@ namespace FlexeraCodingTest
 {
     public interface ILicenceChecker
     {
-        public int CheckNoOfLicences(string dataFile, string appID);
+        public int CheckNoOfLicences(IQuery query);
     }
 }

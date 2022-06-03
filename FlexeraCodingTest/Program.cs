@@ -7,6 +7,7 @@ using FlexeraCodingTest;
 
 tryAgain:
 int licences = 0;
+IQuery query = null;
 string dataFile = "";
 string appID = "";
 
@@ -20,8 +21,14 @@ while (Console.ReadKey().Key != ConsoleKey.Escape) {
         appID = Console.ReadLine();
         if (appID != "")
         {
+            if (query == null)
+            {
+                query = new Query();
+                query.AppID = appID;
+                query.DataFile=dataFile;
+            }
             LicenceChecker licenceChecker = new LicenceChecker();
-            licences = licenceChecker.CheckNoOfLicences(dataFile, appID);
+            licences = licenceChecker.CheckNoOfLicences(query);
         }
         else
         {
