@@ -5,38 +5,35 @@
 
 using FlexeraCodingTest;
 
+Query query = new Query();
+
 tryAgain:
 int licences = 0;
-IQuery query = null;
 string dataFile = "";
 string appID = "";
-
-Console.WriteLine("Please type the full path of a data file including its name and extension, then press the Enter button." + Environment.NewLine);
+Console.WriteLine("Please supply the full path of a data file including its name and extension, then press Enter." + Environment.NewLine);
 dataFile = Console.ReadLine();
 while (Console.ReadKey().Key != ConsoleKey.Escape) {
     //check if user supplied a valid data file path
     if (System.IO.File.Exists (dataFile))
     {
-        Console.WriteLine(Environment.NewLine + "Please enter appID.");
+        enterValidAppID:
+        Console.WriteLine("Please enter a valid appID, then press Enter. " + Environment.NewLine);
         appID = Console.ReadLine();
         if (appID != "")
         {
-            if (query == null)
-            {
-                query = new Query();
-                query.AppID = appID;
-                query.DataFile=dataFile;
-            }
+            query.AppID = appID;
+            query.DataFile = dataFile;
             LicenceChecker licenceChecker = new LicenceChecker();
+            // passing dependency
             licences = licenceChecker.CheckNoOfLicences(query);
         }
         else
         {
-            Console.WriteLine("Please enter a valid appID, then press the Enter button. " + Environment.NewLine);
-            goto tryAgain;
+            goto enterValidAppID;
         }
         Console.WriteLine("The number of licences required: " + licences.ToString() + Environment.NewLine);
-        Console.WriteLine("To exit, please press the ESC button. " + Environment.NewLine);
+        Console.WriteLine("To exit, please press the ESC button." + Environment.NewLine);
     }
     else
     {

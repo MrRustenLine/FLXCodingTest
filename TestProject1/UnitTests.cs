@@ -14,11 +14,11 @@ namespace TestProject1
         [Test]
         public void Setup()
         {
-            licenceChecker = new LicenceChecker();
             query = new Query();
             rootDir = System.IO.Directory.GetCurrentDirectory();
             newRootDir = Path.GetFullPath(Path.Combine(rootDir, @"..\..\..\"));
             query.AppID = "374";
+            licenceChecker = new LicenceChecker();
         }
 
         [Test]

@@ -18,6 +18,9 @@ namespace FlexeraCodingTest
     {
         #region "Public"
 
+        public LicenceChecker()
+        {}
+
         public int CheckNoOfLicences (IQuery query)
         {
             Console.WriteLine("Commencing to check licences. Please wait..." + Environment.NewLine);
@@ -80,6 +83,7 @@ namespace FlexeraCodingTest
         #endregion
 
         #region "Private"
+
 
         private List<Computer>? GetComputers(IQuery query)
         {
