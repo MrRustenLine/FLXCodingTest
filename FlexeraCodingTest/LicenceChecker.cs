@@ -18,15 +18,17 @@ namespace FlexeraCodingTest
     {
         #region "Public"
 
-        public LicenceChecker()
-        {}
+        public LicenceChecker(ISearchParameters searchParameters)
+        {
+            _searchParameters = searchParameters;
+        }
 
-        public int CheckNoOfLicences (IQuery query)
+        public int CheckLicences ()
         {
             Console.WriteLine("Commencing to check licences. Please wait..." + Environment.NewLine);
             try
             {
-                List<Computer>? pCs = GetComputers(query);
+                List<Computer>? pCs = GetComputers();
                 List<Computer> checkedPCs = new List<Computer>();
                 List<Computer> licensedPCs = new List<Computer>();
                 List<Computer> licensedPCsBelongingToUser = new List<Computer>();
@@ -84,20 +86,20 @@ namespace FlexeraCodingTest
 
         #region "Private"
 
-
-        private List<Computer>? GetComputers(IQuery query)
+        ISearchParameters _searchParameters;
+        private List<Computer>? GetComputers()
         {
             List<Computer> computers = new List<Computer>();
             try
             {
-                using (StreamReader reader = new StreamReader(query.DataFile))
+                using (StreamReader reader = new StreamReader(_searchParameters.DataFile))
                 {
                     // split line by line otherwise it could be too memory intensive.
                     while (!reader.EndOfStream)
                     {
                         var line = reader.ReadLine();
                         var values = line.Split(',');
-                        if (values[2] == query.AppID)
+                        if (values[2] == _searchParameters.AppID)
                         {
                             // We are not interested in Comment field.
                             Computer computer = new Computer(int.Parse(values[0]), int.Parse(values[1]), int.Parse(values[2]), values[3].ToLower());
