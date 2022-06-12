@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FlexeraCodingTest\FlexeraCodingTest.csproj" />
+    <ProjectReference Include="..\FlexeraCodingTest\FLXCodingTest.csproj" />
   </ItemGroup>
 
   <ItemGroup>

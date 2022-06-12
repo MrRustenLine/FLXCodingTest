@@ -3,14 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlexeraCodingTest", "FlexeraCodingTest\FlexeraCodingTest.csproj", "{3AF863E1-1DAD-4B69-B2C1-7AA7449CFD2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FLXCodingTest", "FlexeraCodingTest\FLXCodingTest.csproj", "{3AF863E1-1DAD-4B69-B2C1-7AA7449CFD2F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{73EEE62E-10F9-4E8D-9372-B291B69AA191}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestFlexeraCodingTest", "TestProject1\UnitTestFlexeraCodingTest.csproj", "{BD63F442-2135-4776-99F7-5EF95676BD75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestFLXCodingTest", "TestProject1\UnitTestFLXCodingTest.csproj", "{BD63F442-2135-4776-99F7-5EF95676BD75}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

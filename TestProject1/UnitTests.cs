@@ -1,4 +1,4 @@
-using FlexeraCodingTest;
+using FLXCodingTest;
 
 namespace TestProject1
 {

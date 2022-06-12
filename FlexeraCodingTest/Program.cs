@@ -3,7 +3,7 @@
  * Desc: The app is written as a sysadmin console app.
  */
 
-using FlexeraCodingTest;
+using FLXCodingTest;
 
 tryAgain:
 int licences = 0;

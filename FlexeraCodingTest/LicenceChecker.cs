@@ -11,17 +11,14 @@ global using global::System.Configuration;
  * Date: 27.3.22
  * Desc: The licence checker class is tasked with evaluating the required number of per device licences.
  */
-namespace FlexeraCodingTest
+namespace FLXCodingTest
 {
 
     public class LicenceChecker: ILicenceChecker
     {
         #region "Public"
 
-        public LicenceChecker(ISearchParameters searchParameters)
-        {
-            _searchParameters = searchParameters;
-        }
+        public LicenceChecker(ISearchParameters searchParameters) => _searchParameters = searchParameters;
 
         public int CheckLicences ()
         {
