@@ -1,5 +1,5 @@
 # Coding test
-I did this test for one of the software development companies in Melbourne.  
+I did this test for one of the software development companies in Australia.  
 
 ## Problem
 
