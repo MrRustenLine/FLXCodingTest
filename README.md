@@ -1,5 +1,6 @@
 # Coding test
-I did this test for one of the software development companies in Australia.  
+
+This project demonstrates the use of algorithms.
 
 ## Problem
 
@@ -39,24 +40,13 @@ ComputerID  |   UserID  |    ApplicationID  |   ComputerType    |   Comment
 2           |   2       |   374             |   desktop         |   Exported from System B
 
 ## Expectations
-A customer expectation is to provide a solution that calculates the minimum of copies of the application with ID 374 a company must purchase and include some unit tests to show that your code has basic test coverage. 
-
-The customer also indicated the following requirements:
-- Please design and write this code to cover the full set of non-functional concerns you would expect from a software product with high quality 
-- We're looking for extensibility, readability and clean, non-repeated code
-- Make assumptions where you need to - it will be hard to showcase everything but add a few comments in your README to let us know
+Calculate the minimum of copies of the application with ID 374 a company must purchase and include some unit tests to show that your code has basic test coverage. 
 
 ### Safe assumptions to make
 You will not have to consider unexpected situations such as empty values, computers with multiple users or computers that are both desktops and laptops.
 
-# My comments:**
+# Comments:
 
 I used Visual Studio 2022 Community Edition, .NET Framework 6.0. 
 
 3 NUnit tests are included. 
-
-The app does not check all the possible situations that may go wrong. 
-
-Deployment instructions are out of scope but could be provided upon request.
-
-Finally, did I get the job? I accepted a job offer from another vendor while this company was mulling over my code sample.
