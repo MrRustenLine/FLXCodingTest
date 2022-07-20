@@ -1,4 +1,4 @@
-# Coding test
+# Computer Algorithms
 
 This project demonstrates the use of algorithms.
 
